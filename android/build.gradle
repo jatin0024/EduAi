@@ -1,0 +1,51 @@
+// android/build.gradle (Project Level)
+
+buildscript { // <--- ADD THIS BLOCK
+    ext.kotlin_version = '2.1.0' // You might have a different Kotlin version, keep yours if it's recent
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            force 'org.jetbrains.kotlin:kotlin-stdlib:2.1.0' // Force Kotlin stdlib version
+            force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.0' // Force JDK8 stdlib
+            force 'org.jetbrains.kotlin:kotlin-stdlib-common:2.1.0' // Force common stdlib
+            // You might need to add other specific Kotlin modules if errors persist,
+            // but these are the most common ones. Use the version you set in ext.kotlin_version.
+        }
+    }
+
+    dependencies {
+        // This is the Android Gradle Plugin version. Keep yours if it's compatible.
+        classpath 'com.android.tools.build:gradle:8.4.2' // Or whatever version you have
+
+        // This is the Kotlin Gradle plugin.
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // THIS IS THE CRUCIAL LINE FOR GOOGLE SERVICES/FIREBASE
+        // Always use the LATEST version from Firebase documentation:
+        // https://firebase.google.com/docs/android/setup#add-sdk (look for 'google-services' in build.gradle)
+        classpath 'com.google.gms:google-services:4.4.1' // <--- ADD THIS LINE (Use the latest stable version from Firebase docs)
+    }
+} // <--- END OF ADDED BLOCK
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}

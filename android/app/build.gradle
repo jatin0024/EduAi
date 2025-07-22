@@ -1,0 +1,90 @@
+// android/app/build.gradle (App Level)
+
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+    // Ensure this is here. If you had 'version "X.X.X" apply false', remove it.
+    id 'com.google.gms.google-services'
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader("UTF-8") { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty("flutter.versionCode")
+if (flutterVersionCode == null) {
+    flutterVersionCode = "1"
+}
+
+def flutterVersionName = localProperties.getProperty("flutter.versionName")
+if (flutterVersionName == null) {
+    flutterVersionName = "1.0"
+}
+
+android {
+    namespace = "com.example.smart_learning_application" // Keep your actual namespace
+
+    // REMOVE THIS LINE: minSdkVersion 23 // <--- THIS WAS THE PROBLEM LINE (outside defaultConfig)
+
+    compileSdk = flutter.compileSdkVersion // This is correct, usually pulled from flutter.gradle
+    ndkVersion = flutter.ndkVersion // This is correct
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId = "com.company.eduai" // Keep your actual application ID. Make sure this matches your Firebase app's package name!
+
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+
+        // THIS IS WHERE minSdkVersion SHOULD BE DECLARED:
+        // You have two options here:
+        // OPTION 1: Use a fixed minSdkVersion (recommended for stability with Firebase)
+        minSdk = 23 // <--- CORRECTED: Set minSdkVersion directly here to 23 (or higher, e.g., 24, 26)
+        // OPTION 2: Use flutter.minSdkVersion (if you want Flutter to manage it, but ensure it's >= 23)
+        // minSdk = flutter.minSdkVersion // If you use this, ensure flutter.minSdkVersion in flutter.gradle is >= 23
+
+        targetSdk = flutter.targetSdkVersion // This is correct
+        versionCode = flutterVersionCode.toInteger()
+        versionName = flutterVersionName
+    }
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    // Import the Firebase BoM (Bill of Materials) for consistent Firebase versions
+    // Ensure this version is the latest stable. 33.16.0 is current as of July 2025.
+    implementation platform('com.google.firebase:firebase-bom:33.16.0')
+
+    // Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation 'com.google.firebase:firebase-analytics' // Already there
+
+    // ADD THESE FOR AUTHENTICATION AND FIRESTORE
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+
+    // Add the dependencies for any other desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
+}

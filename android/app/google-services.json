@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "770748100272",
+    "project_id": "eduai-717ee",
+    "storage_bucket": "eduai-717ee.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770748100272:android:fb46bcb835ff6f8e589575",
+        "android_client_info": {
+          "package_name": "com.company.eduai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzh3LQZVV6mwKQEOY7kz4Whb0r_ZRBTR8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770748100272:android:7fcc1f16787d6e99589575",
+        "android_client_info": {
+          "package_name": "com.example.smart_learning_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzh3LQZVV6mwKQEOY7kz4Whb0r_ZRBTR8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
