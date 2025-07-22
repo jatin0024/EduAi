@@ -73,11 +73,7 @@ EduAI adapts to the user's **learning preferences** and optimizes their study ex
 
 ---
 
-## 📽️ Live Demo  
 
-[![Watch the Demo](https://img.youtube.com/vi/mJapxqfsXks/0.jpg)](https://www.youtube.com/watch?v=mJapxqfsXks)  
-
-Click the image above to watch EduAI in action!  
 
 ---
 
@@ -96,4 +92,4 @@ Click the image above to watch EduAI in action!
 
 1️⃣ **Clone the repository:**  
 ```bash
-git clone https://github.com/HarshiSharma04/EduAI.git
+git clone https://github.com/jatin0024/EduAI.git
